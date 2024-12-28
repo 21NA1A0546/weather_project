@@ -1,0 +1,87 @@
+<!-- weather_app/templates/compare.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Compare Weather</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <script>
+        function updatePlaceFields() {
+            var numPlaces = document.getElementById('num_places').value;
+            var placeFields = document.getElementById('place_fields');
+            placeFields.innerHTML = '';
+            for (var i = 0; i < numPlaces; i++) {
+                placeFields.innerHTML += '<input type="text" name="place_' + (i + 1) + '" placeholder="Enter place name" required><br>';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Compare Weather</h1>
+        <form method="post" action=".">
+            {% csrf_token %}
+            <label for="num_places">Select number of places to compare:</label>
+            <select id="num_places" name="num_places" onchange="updatePlaceFields()">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            <div id="place_fields">
+                <input type="text" name="place_1" placeholder="Enter place name" required><br>
+                <input type="text" name="place_2" placeholder="Enter place name" required><br>
+            </div>
+            <button type="submit">Compare</button>
+        </form>
+
+        {% if weather_data_list %}
+            <h2>Weather Comparison</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Place Name</th>
+                        <th>Temperature</th>
+                        <th>Feels Like</th>
+                        <th>Precipitation Intensity</th>
+                        <th>Humidity</th>
+                        <th>Wind Speed</th>
+                        <th>Wind Direction</th>
+                        <th>Rain Intensity</th>
+                        <th>Snow Intensity</th>
+                        <th>Pressure (Surface Level)</th>
+                        <th>Pressure (Sea Level)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for data in weather_data_list %}
+                        <tr>
+                            <td>{{ data.place }}</td>
+                            {% if data.error %}
+                                <td colspan="10">{{ data.error }}</td>
+                            {% else %}
+                                <td>{{ data.temperature }}°C</td>
+                                <td>{{ data.temperatureApparent }}°C</td>
+                                <td>{{ data.precipitationIntensity }} mm/h</td>
+                                <td>{{ data.humidity }}%</td>
+                                <td>{{ data.windSpeed }} m/s</td>
+                                <td>{{ data.windDirection }}°</td>
+                                <td>{{ data.rainIntensity }} mm/h</td>
+                                <td>{{ data.snowIntensity }} mm/h</td>
+                                <td>{{ data.pressureSurfaceLevel }} hPa</td>
+                                <td>{{ data.pressureSeaLevel }} hPa</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</body>
+</html>

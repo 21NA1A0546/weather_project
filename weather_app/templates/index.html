@@ -1,0 +1,40 @@
+<!-- weather_app/templates/index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Prediction App</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Weather Prediction App</h1>
+        <form method="get" action=".">
+            <input type="text" name="place" placeholder="Enter place name" required>
+            <button type="submit">Get Weather</button>
+        </form>
+        <a href="{% url 'compare' %}" class="compare-button">Compare</a>
+
+        {% if error_message %}
+            <p>{{ error_message }}</p>
+        {% endif %}
+
+        {% if weather_data %}
+            <h2>Weather Report for {{ weather_data.place }}</h2>
+            <ul>
+                <li>Temperature: {{ weather_data.temperature }}°C</li>
+                <li>Feels Like: {{ weather_data.temperatureApparent }}°C</li>
+                <li>Pressure (Surface Level): {{ weather_data.pressureSurfaceLevel }} hPa</li>
+                <li>Pressure (Sea Level): {{ weather_data.pressureSeaLevel }} hPa</li>
+                <li>Precipitation Intensity: {{ weather_data.precipitationIntensity }} mm/h</li>
+                <li>Humidity: {{ weather_data.humidity }}%</li>
+                <li>Wind Speed: {{ weather_data.windSpeed }} m/s</li>
+                <li>Wind Direction: {{ weather_data.windDirection }}°</li>
+                <li>Rain Intensity: {{ weather_data.rainIntensity }} mm/h</li>
+                <li>Snow Intensity: {{ weather_data.snowIntensity }} mm/h</li>
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>
