@@ -205,6 +205,7 @@ webencodings==0.5.1
 websocket-client==1.6.4
 Werkzeug==3.0.3
 wheel==0.43.0
+whitenoise==6.4.0
 widgetsnbextension==4.0.9
 wrapt==1.16.0
 xyzservices==2024.6.0
