@@ -120,8 +120,10 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 TOMORROW_IO_API_KEY = os.getenv('TOMORROW_IO_API_KEY')
 DATABASE_URL = os.getenv('DATABASE_URL')
 
+print(f"Configured DATABASE_URL: {DATABASE_URL}")
 # Configure database
 import dj_database_url
+
 DATABASES = {
     'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
 }
