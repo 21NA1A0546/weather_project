@@ -154,7 +154,6 @@ python-language-server==0.36.2
 python-lsp-jsonrpc==1.1.2
 python-lsp-server==1.11.0
 pytz==2024.1
-pywin32==306
 pywinpty==2.0.12
 PyYAML==6.0.1
 pyzmq==25.1.1
