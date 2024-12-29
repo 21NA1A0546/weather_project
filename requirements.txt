@@ -209,6 +209,5 @@ widgetsnbextension==4.0.9
 wrapt==1.16.0
 xyzservices==2024.6.0
 yarl==1.9.4
-dj-database-url==2.0.0
 gunicorn==20.1.0
 python-dotenv==1.0.0
